@@ -4,33 +4,32 @@ import { Toolbar, Tabs, Tab } from '@material-ui/core'
 import classes from './MyTableTab.module.scss'
 import PropTypes from 'prop-types'
 
-/*MyTableTab.propTypes = {
+MyTableTab.propTypes = {
   onSelect: PropTypes.func,
-  category: PropTypes.string,
+  tab: PropTypes.string,
   schoolTypes: PropTypes.array
 }
 
 MyTableTab.defaultProps = {
   onSelect: null,
-  category: null,
-  schoolTypes: null
+  tab: null,
+  levels: null
 
-}*/
+}
 
-const MyTableTab  = props => {
+export default function MyTableTab( props) {
   
-  const {schoolTypes,category,onSelect} =props
-  const index = category ? schoolTypes.findIndex(item => item === category) :0
+  const {levels,tab,onSelect} =props
+  const index = tab ? levels.findIndex(item => item === tab) :0
 
   const onIndexSelect = (e, index) =>{
-    
-    onSelect(schoolTypes[index])}
+    onSelect(levels[index])}
 
   return (
     <IconContext.Provider value={{ color: '#000' }}>
       <Toolbar>
         <Tabs value= {index} className={classes.tabs} onChange={onIndexSelect} centered>
-        {schoolTypes.map((school,index) =>
+        {levels.map((school,index) =>
           <Tab key={index} label={school} />
         )}
         </Tabs>
@@ -39,4 +38,4 @@ const MyTableTab  = props => {
   )
 };
 
-export default MyTableTab
+

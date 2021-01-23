@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 MyTableTab.propTypes = {
   onSelect: PropTypes.func,
   tab: PropTypes.string,
-  schoolTypes: PropTypes.array
+  levels: PropTypes.array
 }
 
 MyTableTab.defaultProps = {
@@ -16,15 +16,11 @@ MyTableTab.defaultProps = {
   levels: null
 
 }
-
-export default function MyTableTab( props) {
-  
+export default function MyTableTab( props) { 
   const {levels,tab,onSelect} =props
   const index = tab ? levels.findIndex(item => item === tab) :0
-
   const onIndexSelect = (e, index) =>{
     onSelect(levels[index])}
-
   return (
     <IconContext.Provider value={{ color: '#000' }}>
       <Toolbar>

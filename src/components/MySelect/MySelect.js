@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
@@ -35,13 +35,11 @@ export default function MySelect(props) {
     const classes = useStyles();
     const{items,onSelect,item,label} = props
 
-const handleSelect = (e) =>{
-   if (onSelect) {
-       onSelect(e.target.value,{label})
-
-   }
-    return
-}
+    const handleSelect = (e) =>{
+            if (onSelect) {
+                onSelect(e.target.value,{label})
+            }
+        }
   return (
     <FormControl variant="filled" className={classes.formControl} >
     <InputLabel id="demo-simple-select-filled-label">{label}</InputLabel>

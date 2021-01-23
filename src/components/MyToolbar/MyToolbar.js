@@ -13,8 +13,8 @@ import {
 function MyToolbar() {
   const context = useContext(SchoolContext)
   const {selectTypes,schoolTypeList,statusList,districtList,filter, dispatch} = context
-  const {schoolType,district,status,search} = filter
-
+  const {schoolType,district,status} = filter
+  //Logic dispatch a action to reducer 
   const handleSelectItem = (value,label) =>{
     switch (label.label) {
       case selectTypes[0]:
@@ -39,13 +39,13 @@ function MyToolbar() {
         break
     }
   }
+  //dispatch search action to reducer
   const handleFilterChange = (value) =>{
     dispatch({
       type: REQUEST_SCHOOLS_BY_SEARCH,
       payload: value
     })
   }
-  console.log(filter)
   return (
   <FormControl style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', width: '80%'} }>
   <div>

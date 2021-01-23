@@ -3,7 +3,6 @@ import {FilterSchoolReducer} from '../reducers'
 export const SchoolContext = createContext()
 
 export default ({children}) =>{
-
     ///State(mockup data),  =>this states will be deleted later 
     const [levels,setLevels] = useState([])
     const [schoolTypeList,setSchoolTypeList] = useState([])
@@ -22,7 +21,6 @@ export default ({children}) =>{
             search:""
           }
     )
-
     //Load Levels (mockup), Will be complete later 
     useEffect(() => {
        const newList = ["Tiểu Học","Trung học cơ sở","Trung học phổ thông"]
@@ -45,8 +43,7 @@ export default ({children}) =>{
         const newList = ["School type","District","Status"]
          setSelectTypes(newList)
      }, [])
-     
-    //Context Data
+   //Context Data
     const SchoolContextData = {
         filter,
         levels,
@@ -55,8 +52,7 @@ export default ({children}) =>{
         districtList,
         statusList,
         selectTypes
-    }
-   
+    }  
     //Return 
     return(
         <SchoolContext.Provider value={SchoolContextData}>

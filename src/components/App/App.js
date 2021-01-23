@@ -1,12 +1,9 @@
 import React from 'react'
 import './App.css'
-import {SchoolPage} from "../../pages/SchoolPage"
-
+import { SchoolPage } from '../../pages/SchoolPage'
 
 function App() {
-  
-  return <SchoolPage/>
-  
+  return <SchoolPage />
 }
 
 export default App

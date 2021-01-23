@@ -1,37 +1,32 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { IconContext } from 'react-icons'
 import { Toolbar, Tabs, Tab } from '@material-ui/core'
 import classes from './MyTableTab.module.scss'
-import PropTypes from 'prop-types'
+import {SchoolContext} from '../../contexts'
+import {REQUEST_SCHOOLS_BY_LEVELS} from '../../reducers/types'
 
-MyTableTab.propTypes = {
-  onSelect: PropTypes.func,
-  tab: PropTypes.string,
-  levels: PropTypes.array
-}
+export default function MyTableTab() {
+  const context = useContext(SchoolContext)
+  const {dispatch,levels,filter} = context
+   
 
-MyTableTab.defaultProps = {
-  onSelect: null,
-  tab: null,
-  levels: null
-
-}
-export default function MyTableTab( props) { 
-  const {levels,tab,onSelect} =props
-  const index = tab ? levels.findIndex(item => item === tab) :0
-  const onIndexSelect = (e, index) =>{
-    onSelect(levels[index])}
+  const index = filter.levels ? levels.findIndex((item) => item === filter.levels): 0
+  //
+  const onIndexSelect = (e,val) => {
+     dispatch({
+       type: REQUEST_SCHOOLS_BY_LEVELS,
+       payload: levels[val]
+     })
+    }
   return (
     <IconContext.Provider value={{ color: '#000' }}>
       <Toolbar>
-        <Tabs value= {index} className={classes.tabs} onChange={onIndexSelect} centered>
-        {levels.map((school,index) =>
-          <Tab key={index} label={school} />
-        )}
+        <Tabs value={index} className={classes.tabs} onChange={onIndexSelect} centered>
+          {levels.map((school, index) => (
+            <Tab key={index} label={school} />
+          ))}
         </Tabs>
       </Toolbar>
     </IconContext.Provider>
   )
-};
-
-
+}

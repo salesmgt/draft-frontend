@@ -1,66 +1,51 @@
-import React,{useState} from 'react'
-import PropTypes from 'prop-types'
+import React,{useContext} from 'react'
 import {MySelect} from '../MySelect'
 import {MySearchField} from '../MySearchField'
-import FormControl from '@material-ui/core/FormControl';
+import FormControl from '@material-ui/core/FormControl'
+import {SchoolContext} from '../../contexts'
+import {
+      REQUEST_SCHOOLS_BY_SCHOOLTYPE,
+      REQUEST_SCHOOLS_BY_DISTRICT, 
+      REQUEST_SCHOOLS_BY_STATUS, 
+      REQUEST_SCHOOLS_BY_SEARCH
+} from '../../reducers/types'
 
-MyToolbar.propTypes = {
-  schoolTypeList: PropTypes.array,
-  districtList: PropTypes.array,
-  statusList: PropTypes.array,
-  selectTypes: PropTypes.array,
-  filter: PropTypes.object
-  }
+function MyToolbar() {
+  const context = useContext(SchoolContext)
+  const {selectTypes,schoolTypeList,statusList,districtList,filter, dispatch} = context
+  const {schoolType,district,status,search} = filter
 
-MyToolbar.defaultProps = {
-    schoolTypeList: [],
-    districtList: [],
-    statusList:[],
-    selectTypes:[],
-    filter: null
-    }
-
-function MyToolbar(props) {
-  const {schoolTypeList,districtList,statusList,selectTypes,filter,onSubmit} = props
-  
-  const [filters,setFilters] = useState(
-    { 
-      schoolType: "",
-      district: "",
-      status: "",
-      search:""
-    });
-
-  const {schoolType,district,status} = filters
-
-  const handleFilterChange = value => {
-    const newFilter= {...filters,search: value} 
-    setFilters(newFilter)
-    onSubmit(filters)
-    console.log("Gia tri fields: ",newFilter)
-  }
-
-  const handleSelectItem =(value,select)=>{
-    let newFilter = {}
-    console.log("halo  ",select.label)
-    switch(select.label){
+  const handleSelectItem = (value,label) =>{
+    switch (label.label) {
       case selectTypes[0]:
-            newFilter= {...filter,schoolType: value} 
-            break
+        dispatch({
+          type: REQUEST_SCHOOLS_BY_SCHOOLTYPE,
+          payload: value
+        })
+        break
       case selectTypes[1]:
-        newFilter= {...filter,district:value}
-            break
+        dispatch({
+          type: REQUEST_SCHOOLS_BY_DISTRICT,
+          payload: value
+        })
+        break
       case selectTypes[2]:
-        newFilter= {...filter,status:value}
-            break
-      default : break
+        dispatch({
+          type: REQUEST_SCHOOLS_BY_STATUS,
+          payload: value
+        })
+        break
+      default:
+        break
     }
-    setFilters(newFilter)
-    if(onSubmit)     
-    onSubmit(filters)
-    console.log("Gia tri fields: ",filters)
-  } 
-  
+  }
+  const handleFilterChange = (value) =>{
+    dispatch({
+      type: REQUEST_SCHOOLS_BY_SEARCH,
+      payload: value
+    })
+  }
+  console.log(filter)
   return (
   <FormControl style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', width: '80%'} }>
   <div>
@@ -72,6 +57,4 @@ function MyToolbar(props) {
     </FormControl>
   )
 }
-
 export default MyToolbar
-

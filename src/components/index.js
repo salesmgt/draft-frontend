@@ -1,4 +1,5 @@
 export { App } from './App'
 export { MyTableTab } from './MyTableTab'
-export { MyToolbar} from './MyToolbar'
-export { MySelecet} from './MySelect'
+export { MyToolbar } from './MyToolbar'
+export { MySelect } from './MySelect'
+export { MyTable } from './MyTable'

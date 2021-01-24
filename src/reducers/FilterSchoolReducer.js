@@ -5,12 +5,12 @@ import {
     REQUEST_SCHOOLS_BY_STATUS,
     REQUEST_SCHOOLS_BY_SEARCH,
 } from './types'
-
+ 
 export const FilterSchoolReducer = (state, action) => {
     const {type, payload} = action
     switch (type) {
         case REQUEST_SCHOOLS_BY_LEVELS: 
-            return {...state,levels: payload}
+            return {...state,level: payload}
         case REQUEST_SCHOOLS_BY_SCHOOLTYPE:
             return {...state,schoolType: payload}
         case REQUEST_SCHOOLS_BY_DISTRICT:

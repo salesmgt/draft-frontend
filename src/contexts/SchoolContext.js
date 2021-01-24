@@ -1,7 +1,10 @@
 import React, {createContext, useReducer, useState, useEffect} from 'react'
-import {FilterSchoolReducer} from '../reducers'
-export const SchoolContext = createContext()
+import {FilterSchoolReducer, SchoolReducer} from '../reducers'
+import {
+    GET_SCHOOLS,
+} from '../reducers/types'
 
+export const SchoolContext = createContext()
 export default ({children}) =>{
     ///State(mockup data),  =>this states will be deleted later 
     const [levels,setLevels] = useState([])
@@ -9,40 +12,63 @@ export default ({children}) =>{
     const [districtList,setDistrictList] = useState([])
     const [statusList,setStatusList] = useState([])
     const [selectTypes,setSelectTypes] = useState([])
-   
+    
     //Declare Reducer 
     const [filter, dispatch] = useReducer(
         FilterSchoolReducer, 
         {
-            levels: "Tiểu Học",
+            level: "Tiểu học",
             schoolType: "",
             district: "",
             status: "",
-            search:""
+            search: ""
           }
     )
+    //school is School list-data-state => show in Table. 
+    const [schools, dispatchSchool] = useReducer(SchoolReducer,[])
+
     //Load Levels (mockup), Will be complete later 
     useEffect(() => {
-       const newList = ["Tiểu Học","Trung học cơ sở","Trung học phổ thông"]
+       const newList = ["Tiểu học","Trung học cơ sở","Trung học phổ thông"]
         setLevels(newList)
     }, [])
     //Load TypesList(mockup)
     useEffect(() => {
-        const newList = ["Dân lập","Công lập","Bán công"]
+        async function fetchPostList(){
+        let newList = ["Công lập", "Ngoài công lập","Bán công"]
          setSchoolTypeList(newList)
-     }, [])
-    useEffect(() => {
-        const newList = ["Q1","Q2","Q3","Q4","Q5","Q6","Tân Bình","Bình Tân","Nhà Bè","Bình Chánh"]
+         newList = ["1","2","3","4","5","6","7","Tân Bình","Bình Tân","Nhà Bè","Bình Chánh"]
          setDistrictList(newList)
-     }, [])
-    useEffect(() => {
-        const newList =  ["Cũ","Mới"]
+         newList =  ["Cũ","Mới"]
          setStatusList(newList)
-     }, [])
-     useEffect(() => {
-        const newList = ["School type","District","Status"]
+         newList = ["School type","District","Status"]
          setSelectTypes(newList)
+        }
+        fetchPostList()
      }, [])
+     //Load schools data mockup from file data
+     useEffect(() => {
+        async function fetchPostList(){
+         try {
+             dispatchSchool({
+                 type: GET_SCHOOLS,
+                 payload: filter
+             })
+        /*const paramsString = queryString.stringify(filters); Dont remove this cmt !!!!!
+        const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
+        console.log({ responseJSON });
+
+        const { data, pagination } = responseJSON;
+        setPostList(data);
+        setPagination(pagination);*/
+         } catch (error) {
+             console.log('Fail to fetch data')
+         }
+        }
+        fetchPostList()        
+     },[filter])
    //Context Data
     const SchoolContextData = {
         filter,

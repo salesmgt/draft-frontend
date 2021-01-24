@@ -10,7 +10,7 @@ export default function MyTableTab() {
   const {dispatch,levels,filter} = context
    
 
-  const index = filter.levels ? levels.findIndex((item) => item === filter.levels): 0
+  const index = filter.level ? levels.findIndex((item) => item === filter.level): 0
   //
   const onIndexSelect = (e,val) => {
      dispatch({

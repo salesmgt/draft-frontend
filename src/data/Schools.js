@@ -541,7 +541,7 @@ export const data = [
   {
     id: 50,
     schoolName: 'Nguyễn Thái Sơn',
-    type: 'Công lập',
+    type: 'Bán công',
     district: '1',
     address: '68/29B Trần Quang Khải, P.Tân Định ',
     contact: '038484288',
@@ -552,7 +552,7 @@ export const data = [
   {
     id: 51,
     schoolName: 'Hoàng Diệu',
-    type: 'Công lập',
+    type: 'Bán công',
     district: '1',
     address: '68/29B Trần Quang Khải, P.Tân Định',
     contact: '038484288',
@@ -563,7 +563,7 @@ export const data = [
   {
     id: 52,
     schoolName: 'Việt Anh',
-    type: 'Công lập',
+    type: 'Ngoài công lập',
     district: '1',
     address: '105 Nguyễn Thái Bình, P.Nguyễn Thái Bình ',
     contact: '038484288',

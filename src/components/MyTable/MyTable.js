@@ -30,7 +30,6 @@ function TablePaginationActions(props) {
 
   const handleLastPageButtonClick = (event) => {
     onChangePage(event, Math.ceil(count / rowsPerPage) - 1)
-    console.log('max page', Math.ceil(count / rowsPerPage))
   }
 
   const handleBackPageButtonClick = (event) => {
@@ -70,6 +69,8 @@ TablePaginationActions.propTypes = {
 // Customize component Table
 function MyTable(props) {
   // const classes = useStyles()
+
+  // Use States and Props to pass data for rows and columns from the Container/Page
   let { rows, columns } = props
 
   const [page, setPage] = useState(0)
@@ -84,60 +85,64 @@ function MyTable(props) {
     setPage(0)
   }
 
-  // Vì hiện tại chưa có database nên tạm thời đổ data mock vào
-  columns = ['ID', 'School name', 'Level', 'School Type', 'District', 'Address', 'Contact', 'Representor', 'Status', 'Actions']
-
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table}>
+      <Table className={classes.table} stickyHeader={true} aria-label="sticky table">
         <TableHead>
-          <TableRow className={classes.thead}>
+          <TableRow>
             {columns.map((column) => (
               <TableCell className={classes.tcell}>{column}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {(rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((r) => (
-            <TableRow key={r.id}>
-              <TableCell>{r.id}</TableCell>
-              <TableCell>{r.schoolName}</TableCell>
-              <TableCell>{r.level}</TableCell>
-              <TableCell>{r.type}</TableCell>
-              <TableCell>{r.district}</TableCell>
-              <TableCell>{r.address}</TableCell>
-              <TableCell>{r.contact}</TableCell>
-              <TableCell>{r.representor}</TableCell>
-              <TableCell>{r.status}</TableCell>
-              <TableCell>
-                <IconButton>
-                  <MdModeEdit />
-                </IconButton>
-                <IconButton>
-                  <MdDelete />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          ))}
+          {rows > 0 ? (
+            (rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((r) => (
+              <TableRow key={r.id}>
+                <TableCell>{r.id}</TableCell>
+                <TableCell>{r.schoolName}</TableCell>
+                <TableCell>{r.level}</TableCell>
+                <TableCell>{r.type}</TableCell>
+                <TableCell align="center">{r.district}</TableCell>
+                <TableCell>{r.address}</TableCell>
+                <TableCell>{r.contact}</TableCell>
+                <TableCell>{r.representor}</TableCell>
+                <TableCell align="center">{r.status}</TableCell>
+                <TableCell>
+                  <IconButton>
+                    <MdModeEdit />
+                  </IconButton>
+                  <IconButton>
+                    <MdDelete />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <i style={{ color: 'gray', fontSize: '1.3em' }}>No records found.</i>
+          )}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              colSpan={3}
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              SelectProps={{
-                inputProps: { 'aria-label': 'rows per page' },
-                native: true,
-              }}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-            />
-          </TableRow>
-        </TableFooter>
+
+        {rows > 0 && (
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                colSpan={3}
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { 'aria-label': 'rows per page' },
+                  native: true,
+                }}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        )}
       </Table>
     </TableContainer>
   )
@@ -145,9 +150,8 @@ function MyTable(props) {
 
 // Quy định properties của MyTable
 MyTable.propTypes = {
-  rows: PropTypes.array.isRequired,
+  rows: PropTypes.array, // .isRequired
   columns: PropTypes.array.isRequired,
-  // filter:
 }
 
 export default MyTable

@@ -1,5 +1,6 @@
 import {GET_SCHOOLS} from './types'
 import { data as schoolData } from '../data'
+
 export const SchoolReducer = (state,action) => {
     const {type,payload} = action
     const {level, district, schoolType, status, search} =  payload
@@ -17,7 +18,7 @@ export const SchoolReducer = (state,action) => {
                 if(search.length!==0)
                     list = list.filter(item => item.schoolName.includes(search))
             }
-            console.log(list)           
+            console.log('SchoolReducer: ', list)           
             state = [...list]
             return state
         default: return state

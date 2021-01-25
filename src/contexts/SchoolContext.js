@@ -44,13 +44,8 @@ const SchoolContextProvider = ({children}) =>{
      useEffect(() => {
         async function fetchPostList(){
          try {
-<<<<<<< HEAD
-             dispatchSchool({
-                 type: GET_SCHOOLS, 
-=======
              dispatchSchools({
                  type: GET_SCHOOLS,
->>>>>>> 614ad888b4f5ab86090f71459a62c170a4190bd7
                  payload: filter
              })
         /*const paramsString = queryString.stringify(filters); Dont remove this cmt !!!!!

@@ -60,30 +60,6 @@ function MyToolbar() {
       payload: value
     })
   }
-<<<<<<< HEAD
-  return (<>
-    <Paper elevation={3} className={style.pageContent}>
-    
-  <FormControl style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', width: '80%'} }>
-  <div>
-    <MySelect label={selectTypes[0]} item={schoolType} onSelect={handleSelectItem} items ={schoolTypeList}/>
-    <MySelect label = {selectTypes[1]} item={district} onSelect={handleSelectItem} items ={districtList}/>
-    <MySelect label = {selectTypes[2]} item={status} onSelect={handleSelectItem} items ={statusList}/>
-  </div>
-  <div>
-    <MySearchField onSubmit={handleFilterChange} />
-  </div>
-    <MyButton onClick={() => setOpenPopup(true)} label={"Add"}><AddIcon/></MyButton>
-    <MyButton label={"Export"}><FaFileExport/></MyButton>
-    </FormControl> 
-    </Paper>
-    <MyPopup 
-    openPopup = {openPopup}
-    setOpenPopup = {setOpenPopup}
-    >
-    </MyPopup>
-  </>)
-=======
   return (
     <>
       <Paper elevation={3} className={style.pageContent}>
@@ -107,6 +83,5 @@ function MyToolbar() {
       <MyPopup openPopup={openPopup} setOpenPopup={setOpenPopup}></MyPopup>
     </>
   )
->>>>>>> 614ad888b4f5ab86090f71459a62c170a4190bd7
 }
 export default MyToolbar

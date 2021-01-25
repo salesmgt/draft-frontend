@@ -1,7 +1,7 @@
 import React,{useContext,useState} from 'react'
 import {MySelect} from '../MySelect'
 import { makeStyles } from '@material-ui/core/styles'
-import AddIcon from '@material-ui/icons/Add'
+import { MdAdd } from 'react-icons/md'
 import {MySearchField} from '../MySearchField'
 import {FormControl,Paper} from '@material-ui/core/'
 import {SchoolContext} from '../../contexts'
@@ -60,29 +60,28 @@ function MyToolbar() {
       payload: value
     })
   }
-  return (<>
-    <Paper elevation={3} className={style.pageContent}>
-    
-  <FormControl style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between', width: '80%'} }>
-  <div>
-    <MySelect label={selectTypes[0]} item={schoolType} onSelect={handleSelectItem} items ={schoolTypeList}/>
-    <MySelect label = {selectTypes[1]} item={district} onSelect={handleSelectItem} items ={districtList}/>
-    <MySelect label = {selectTypes[2]} item={status} onSelect={handleSelectItem} items ={statusList}/>
-  </div>
-  <div>
-    <MySearchField onSubmit={handleFilterChange} />
-   
-    </div>
-    <MyButton onClick={() => setOpenPopup(true)} label={"Add"}><AddIcon/></MyButton>
-    <MyButton label={"Export"}><FaFileExport/></MyButton>
-    </FormControl> 
-    </Paper>
-    <MyPopup 
-    openPopup = {openPopup}
-    setOpenPopup = {setOpenPopup}
-    >
-
-    </MyPopup>
-  </>)
+  return (
+    <>
+      <Paper elevation={3} className={style.pageContent}>
+        <FormControl style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '80%' }}>
+          <div>
+            <MySelect label={selectTypes[0]} item={schoolType} onSelect={handleSelectItem} items={schoolTypeList} />
+            <MySelect label={selectTypes[1]} item={district} onSelect={handleSelectItem} items={districtList} />
+            <MySelect label={selectTypes[2]} item={status} onSelect={handleSelectItem} items={statusList} />
+          </div>
+          <div>
+            <MySearchField onSubmit={handleFilterChange} />
+          </div>
+          <MyButton onClick={() => setOpenPopup(true)} label={'Add'}>
+            <MdAdd />
+          </MyButton>
+          <MyButton label={'Export'}>
+            <FaFileExport />
+          </MyButton>
+        </FormControl>
+      </Paper>
+      <MyPopup openPopup={openPopup} setOpenPopup={setOpenPopup}></MyPopup>
+    </>
+  )
 }
 export default MyToolbar

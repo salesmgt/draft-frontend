@@ -71,7 +71,9 @@ function MyTable(props) {
   // const classes = useStyles()
 
   // Use States and Props to pass data for rows and columns from the Container/Page
-  let { rows, columns } = props
+  const { rows, columns } = props
+
+  console.log('rows', rows)
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -96,7 +98,7 @@ function MyTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows > 0 ? (
+          {rows.length > 0 ? (
             (rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((r) => (
               <TableRow key={r.id}>
                 <TableCell>{r.id}</TableCell>
@@ -123,7 +125,7 @@ function MyTable(props) {
           )}
         </TableBody>
 
-        {rows > 0 && (
+        {rows.length > 0 && (
           <TableFooter>
             <TableRow>
               <TablePagination
@@ -150,7 +152,7 @@ function MyTable(props) {
 
 // Quy định properties của MyTable
 MyTable.propTypes = {
-  rows: PropTypes.array, // .isRequired
+  rows: PropTypes.array.isRequired, // .isRequired
   columns: PropTypes.array.isRequired,
 }
 

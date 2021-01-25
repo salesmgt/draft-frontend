@@ -1,18 +1,17 @@
-import React,{useState,useRef} from 'react';
-import InputBase from '@material-ui/core/InputBase';
-import { makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
-import PropTypes from 'prop-types';
+import React, { useState, useRef } from 'react'
+import InputBase from '@material-ui/core/InputBase'
+import { makeStyles } from '@material-ui/core/styles'
+// import SearchIcon from '@material-ui/icons/Search';
+import { MdSearch } from 'react-icons/md'
+import PropTypes from 'prop-types'
 
-
-const useStyles =   makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   search: {
-    
     position: 'relative',
-    borderRadius: theme.shape.borderRadius, 
-    backgroundColor: "#bbdefb",  // mã màu này là màu searchfield nha, màu default á
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: '#bbdefb', // mã màu này là màu searchfield nha, màu default á
     '&:hover': {
-      backgroundColor: "#e3f2fd", //mã màu này là lúc hover nè
+      backgroundColor: '#e3f2fd', //mã màu này là lúc hover nè
     },
     marginLeft: 0,
     height: '100%',
@@ -47,53 +46,48 @@ const useStyles =   makeStyles((theme) => ({
       },
     },
   },
-}));
-
-
-
+}))
 
 MySearchField.propTypes = {
-    onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 }
 
 MySearchField.defaultProps = {
-    onSubmit: null,
+  onSubmit: null,
 }
 
 export default function MySearchField(props) {
-    const classes = useStyles();
-    const typingTimeOutRef = useRef("")
-    const {onSubmit} = props
-    const [searchSchool, setSearchSchool] = useState('');
+  const classes = useStyles()
+  const typingTimeOutRef = useRef('')
+  const { onSubmit } = props
+  const [searchSchool, setSearchSchool] = useState('')
 
-    const handleChange = e =>{
-        const value = e.target.value
-        setSearchSchool(e.target.value)
-        if(!onSubmit) return
-        if(typingTimeOutRef.current) clearTimeout(typingTimeOutRef.current)
+  const handleChange = (e) => {
+    const value = e.target.value
+    setSearchSchool(e.target.value)
+    if (!onSubmit) return
+    if (typingTimeOutRef.current) clearTimeout(typingTimeOutRef.current)
 
-        typingTimeOutRef.current = setTimeout(()=>{
-            onSubmit(value)
-        }, 450)
-       
-    }
+    typingTimeOutRef.current = setTimeout(() => {
+      onSubmit(value)
+    }, 450)
+  }
   return (
-          <div className={classes.search} style={{height: '100%'}} >
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-                value={searchSchool}
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={handleChange}
-            />
-          </div>
-        
-      
-  );
+    <div className={classes.search} style={{ height: '100%' }}>
+      <div className={classes.searchIcon}>
+        {/* <SearchIcon /> */}
+        <MdSearch />
+      </div>
+      <InputBase
+        value={searchSchool}
+        placeholder="Search…"
+        classes={{
+          root: classes.inputRoot,
+          input: classes.inputInput,
+        }}
+        inputProps={{ 'aria-label': 'search' }}
+        onChange={handleChange}
+      />
+    </div>
+  )
 }

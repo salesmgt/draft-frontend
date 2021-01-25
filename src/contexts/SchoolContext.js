@@ -1,11 +1,10 @@
-import React, {createContext, useReducer, useState, useEffect} from 'react'
-import {FilterSchoolReducer, SchoolReducer} from '../reducers'
-import {
-    GET_SCHOOLS,
-} from '../reducers/types'
+import React, { createContext, useReducer, useState, useEffect } from 'react'
+import { FilterSchoolReducer, SchoolReducer } from '../reducers'
+import { GET_SCHOOLS } from '../reducers/types'
 
 export const SchoolContext = createContext()
-export default ({children}) =>{
+
+const SchoolContextProvider = ({children}) =>{
     ///State(mockup data),  =>this states will be deleted later 
     const [levels,setLevels] = useState([])
     const [schoolTypeList,setSchoolTypeList] = useState([])
@@ -24,7 +23,7 @@ export default ({children}) =>{
           }
     )
     //school is School list-data-state => show in Table. 
-    const [schools, dispatchSchool] = useReducer(SchoolReducer,[])
+    const [schools, dispatchSchools] = useReducer(SchoolReducer,[])
     //Load TypesList(mockup)
     useEffect(() => {
         async function fetchPostList(){
@@ -45,8 +44,13 @@ export default ({children}) =>{
      useEffect(() => {
         async function fetchPostList(){
          try {
+<<<<<<< HEAD
              dispatchSchool({
                  type: GET_SCHOOLS, 
+=======
+             dispatchSchools({
+                 type: GET_SCHOOLS,
+>>>>>>> 614ad888b4f5ab86090f71459a62c170a4190bd7
                  payload: filter
              })
         /*const paramsString = queryString.stringify(filters); Dont remove this cmt !!!!!
@@ -58,26 +62,26 @@ export default ({children}) =>{
         const { data, pagination } = responseJSON;
         setPostList(data);
         setPagination(pagination);*/
-         } catch (error) {
-             console.log('Fail to fetch data')
-         }
-        }
-        fetchPostList()        
-     },[filter])
-   //Context Data
-    const SchoolContextData = {
-        filter,
-        levels,
-        dispatch,
-        schoolTypeList,
-        districtList,
-        statusList,
-        selectTypes
-    }  
-    //Return 
-    return(
-        <SchoolContext.Provider value={SchoolContextData}>
-            {children}
-        </SchoolContext.Provider>
-    )
+      } catch (error) {
+        console.log('Fail to fetch data')
+      }
+    }
+    fetchPostList()
+  }, [filter])
+  //Context Data
+  const SchoolContextData = {
+    filter,
+    levels,
+    dispatch,
+    schoolTypeList,
+    districtList,
+    statusList,
+    selectTypes,
+    schools,
+    dispatchSchools,
+  }
+  //Return SchoolContextProvider
+  return <SchoolContext.Provider value={SchoolContextData}>{children}</SchoolContext.Provider>
 }
+
+export default SchoolContextProvider

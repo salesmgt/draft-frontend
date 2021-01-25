@@ -1,5 +1,6 @@
 import {GET_SCHOOLS} from './types'
 import { data as schoolData } from '../data'
+
 export const SchoolReducer = (state,action) => {
     const {type,payload} = action
     const {level, district, schoolType, status, search} =  payload

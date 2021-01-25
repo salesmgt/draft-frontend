@@ -7,7 +7,9 @@ import {REQUEST_SCHOOLS_BY_LEVELS} from '../../reducers/types'
 
 export default function MyTableTab() {
   const context = useContext(SchoolContext)
-  const {dispatch,levels,filter} = context
+  const { dispatch, levels, filter } = context
+  
+  console.log('Tab - context: ', context)
    
 
   const index = filter.level ? levels.findIndex((item) => item === filter.level): 0

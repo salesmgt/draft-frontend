@@ -6,12 +6,12 @@
 
 .table {
   min-width: 650;
-  
-  .thead {
-    background-color: $light-primary;
 
-    .tcell {
-      color: $light-secondary;
-    }
+  .tcell {
+    background-color: $light-primary; // !important
+    color: $light-secondary;
+    font-weight: bold;
+    // text-align: center;
+    // position: sticky;
   }
 }

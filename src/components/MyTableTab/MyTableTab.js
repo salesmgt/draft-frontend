@@ -27,7 +27,7 @@ export default function MyTableTab() {
           {levels.map((school, index) => (
             <Tab key={index} label={school} />
           ))}
-        </Tabs>
+        </Tabs>  
       </Toolbar>
     </IconContext.Provider>
   )

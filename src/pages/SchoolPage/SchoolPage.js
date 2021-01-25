@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import { MyTableTab, MyTable, MyToolbar } from '../../components'
-// import { data as schoolData } from '../../data'
+import { MyTableTab, MyToolbar, MyTable } from '../../components'
 import { SchoolContext } from '../../contexts'
-
+import SchoolForm from './SchoolForm'
 function SchoolPage() {
   /* const handleTabSelected = tab => {
     let newFilter = {...filter,level:tab}

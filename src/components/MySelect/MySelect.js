@@ -28,22 +28,23 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 })) 
-export default function MySelect(props) {
+export default function MySelect(props) { 
   const classes = useStyles()
   const { items, onSelect, item, label } = props
 
   const handleSelect = (e) => {
     if (onSelect) {
-      onSelect(e.target.value, { label })
+      const {value, name} = e.target
+      onSelect(value, name)
     }
     return
   }
   return (
     <FormControl variant="filled" className={classes.formControl}>
       <InputLabel id="demo-simple-select-filled-label">{label}</InputLabel>
-      <Select labelId="demo-simple-select-filled-label" id="demo-simple-select-filled" value={item} onChange={handleSelect}>
+      <Select labelId="demo-simple-select-filled-label" id="demo-simple-select-filled" value={item} onChange={handleSelect} name = {label}>
         <MenuItem value="">
-          <em>All</em>
+          <em>None</em>
         </MenuItem>
         {items.map((item, index) => (
           <MenuItem key={index} value={item}>

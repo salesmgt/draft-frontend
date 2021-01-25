@@ -11,8 +11,7 @@ export default ({children}) =>{
     const [schoolTypeList,setSchoolTypeList] = useState([])
     const [districtList,setDistrictList] = useState([])
     const [statusList,setStatusList] = useState([])
-    const [selectTypes,setSelectTypes] = useState([])
-    
+    const [selectTypes,setSelectTypes] = useState([])   
     //Declare Reducer 
     const [filter, dispatch] = useReducer(
         FilterSchoolReducer, 
@@ -26,12 +25,6 @@ export default ({children}) =>{
     )
     //school is School list-data-state => show in Table. 
     const [schools, dispatchSchool] = useReducer(SchoolReducer,[])
-
-    //Load Levels (mockup), Will be complete later 
-    useEffect(() => {
-       const newList = ["Tiểu học","Trung học cơ sở","Trung học phổ thông"]
-        setLevels(newList)
-    }, [])
     //Load TypesList(mockup)
     useEffect(() => {
         async function fetchPostList(){
@@ -41,8 +34,10 @@ export default ({children}) =>{
          setDistrictList(newList)
          newList =  ["Cũ","Mới"]
          setStatusList(newList)
-         newList = ["School type","District","Status"]
+         newList = ["School type","District","Status","Levels"]
          setSelectTypes(newList)
+         newList = ["Tiểu học","Trung học cơ sở","Trung học phổ thông"]
+         setLevels(newList)
         }
         fetchPostList()
      }, [])

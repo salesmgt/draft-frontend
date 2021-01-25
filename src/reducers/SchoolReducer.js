@@ -16,8 +16,7 @@ export const SchoolReducer = (state,action) => {
                     list = list.filter(item => item.status===status)
                 if(search.length!==0)
                     list = list.filter(item => item.schoolName.includes(search))
-            }
-            console.log(list)           
+            }      
             state = [...list]
             return state
         default: return state

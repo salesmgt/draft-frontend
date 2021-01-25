@@ -1,8 +1,8 @@
 import React from 'react'
-import { MyTableTab, MyTable, MyToolbar } from '../../components'
+import { MyTableTab,MyToolbar, MyTable } from '../../components'
 import { data as schoolData } from '../../data'
 import {SchoolContextProvider} from '../../contexts'
-
+import SchoolForm from './SchoolForm'
 function SchoolPage() {
 
  /* const handleTabSelected = tab => {
@@ -17,6 +17,7 @@ function SchoolPage() {
     <SchoolContextProvider>
         <MyTableTab/>
         <MyToolbar/>
+        <SchoolForm/>
    </SchoolContextProvider>)
 }
 export default SchoolPage

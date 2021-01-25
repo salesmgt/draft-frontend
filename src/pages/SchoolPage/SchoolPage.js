@@ -24,6 +24,7 @@ function SchoolPage() {
       <MyTableTab />
       <MyToolbar />
       <MyTable columns={columns} rows={schools} />
+      <SchoolForm/>
     </>
   )
 }

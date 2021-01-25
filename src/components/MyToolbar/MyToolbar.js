@@ -34,7 +34,7 @@ function MyToolbar() {
       case selectTypes[0]:
         dispatch({
           type: REQUEST_SCHOOLS_BY_SCHOOLTYPE,
-          payload: value
+          payload: value 
         })
         break
       case selectTypes[1]:
@@ -71,8 +71,7 @@ function MyToolbar() {
   </div>
   <div>
     <MySearchField onSubmit={handleFilterChange} />
-   
-    </div>
+  </div>
     <MyButton onClick={() => setOpenPopup(true)} label={"Add"}><AddIcon/></MyButton>
     <MyButton label={"Export"}><FaFileExport/></MyButton>
     </FormControl> 
@@ -81,7 +80,6 @@ function MyToolbar() {
     openPopup = {openPopup}
     setOpenPopup = {setOpenPopup}
     >
-
     </MyPopup>
   </>)
 }

@@ -35,7 +35,7 @@ export default function MySelect(props) {
   const handleSelect = (e) => {
     if (onSelect) {
       const {value, name} = e.target
-      onSelect(value, name)
+      onSelect(value, name) 
     }
     return
   }

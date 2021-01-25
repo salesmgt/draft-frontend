@@ -46,7 +46,7 @@ export default ({children}) =>{
         async function fetchPostList(){
          try {
              dispatchSchool({
-                 type: GET_SCHOOLS,
+                 type: GET_SCHOOLS, 
                  payload: filter
              })
         /*const paramsString = queryString.stringify(filters); Dont remove this cmt !!!!!

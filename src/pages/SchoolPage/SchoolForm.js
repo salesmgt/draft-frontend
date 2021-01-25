@@ -1,11 +1,8 @@
 import React, {useState, useEffect, useContext} from 'react'
 import PropTypes from 'prop-types'
 import { Box, TextField } from '@material-ui/core'
-import {MySelect} from '../../components'
-import {ADD_SCHOOL} from '../../reducers/types'
 import {SchoolContext} from '../../contexts'
-import {useForm,MyForm} from '../../components'
-import {MyInput} from '../../components'
+import {useForm,MyForm,MyCheckBox,MyInput,MySelect} from '../../components'
 const initialFValues = {
     id: 999,
     schoolName: '',
@@ -16,11 +13,12 @@ const initialFValues = {
     representor: '',
     status: '',
     level: '',
+    representer: false
   }
 
 
 const SchoolForm = () => {
-   const {values,handleInputChange ,setValues} = useForm(initialFValues)
+   const {values,handleInputChange ,setValues,handleCheckBoxChange} = useForm(initialFValues)
     const context = useContext(SchoolContext)
     const {levels,selectTypes,schoolTypeList,statusList,districtList,filter, dispatch} = context
     const handleSelectItem = (value,label) =>{
@@ -41,11 +39,7 @@ const SchoolForm = () => {
             break
         }
       }
-      const handleOnChange = (e) =>{
-            const {name, value} = e.target
-            setValues({...values,[name]:value})
-            console.log(values)
-      } 
+     
     return (
         <MyForm>
            <Box display='flex' bgcolor='background.paper'>
@@ -53,6 +47,12 @@ const SchoolForm = () => {
                 <MyInput name="schoolName"  label="School name"/>
                   <MySelect label = {"Status"} item={values.status} onSelect={handleSelectItem} items ={statusList}/>
                   <MySelect label = {"Area"} item={values.district} onSelect={handleSelectItem} items ={districtList}/>
+                  <MyCheckBox 
+                  onChange={handleInputChange}
+                  name="representer" 
+                  label="Representer" 
+                  value= {values.representer}
+                 />
              </Box>
            </Box>
             

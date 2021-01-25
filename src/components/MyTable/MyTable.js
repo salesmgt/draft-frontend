@@ -1,25 +1,20 @@
 import React, { useState } from 'react'
 import { useTheme } from '@material-ui/core/styles'
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TableFooter, TablePagination, Paper, IconButton } from '@material-ui/core'
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell, TableFooter, TablePagination, Paper, IconButton , makeStyles} from '@material-ui/core'
 import { MdDelete, MdModeEdit, MdFirstPage, MdKeyboardArrowLeft, MdKeyboardArrowRight, MdLastPage } from 'react-icons/md'
 import PropTypes from 'prop-types'
 import classes from './MyTable.module.scss'
 
 // Customize CSS of MUI
-// const useStyles = makeStyles(() => ({
-//   root: {
-//     flexShrink: 0,
-//   },
-//   table: {
-//     minWidth: 650,
-//   },
-//   thead: {
-//     backgroundColor: 'main-info',
-//   },
-// }))
+const useStyles = makeStyles(() => ({
+  customTableContainer: {
+    overflowX: "initial"
+  }
+}))
 
 // Customize component TablePagination
 function TablePaginationActions(props) {
+  
   const theme = useTheme()
   const { count, page, rowsPerPage, onChangePage } = props
 
@@ -69,11 +64,9 @@ TablePaginationActions.propTypes = {
 // Customize component Table
 function MyTable(props) {
   // const classes = useStyles()
-
+  const styles = useStyles();
   // Use States and Props to pass data for rows and columns from the Container/Page
   const { rows, columns } = props
-
-  console.log('rows', rows)
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -88,8 +81,8 @@ function MyTable(props) {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} stickyHeader={true} aria-label="sticky table">
+    <TableContainer classes={{ root: styles.customTableContainer }} component={Paper}>
+      <Table className={classes.table}  stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             {columns.map((column) => (
@@ -100,7 +93,7 @@ function MyTable(props) {
         <TableBody>
           {rows.length > 0 ? (
             (rowsPerPage > 0 ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : rows).map((r) => (
-              <TableRow key={r.id}>
+              <TableRow  key={r.id}>
                 <TableCell>{r.id}</TableCell>
                 <TableCell>{r.schoolName}</TableCell>
                 <TableCell>{r.level}</TableCell>

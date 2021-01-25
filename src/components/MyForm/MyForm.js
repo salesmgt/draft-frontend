@@ -8,12 +8,17 @@ export function useForm(initialFValues) {
         const {name, value} = e.target
         setValues({...values,[name]:value})
     }
+    const handleCheckBoxChange = (e) =>{
+        const {name, value} = e.target
+        setValues({...values,[name]:!value})
+    }
+
     return ({
         values,
         setValues,
-        handleInputChange
-    }
-    )
+        handleInputChange ,
+        handleCheckBoxChange  
+    })
 }
 const useStyle = makeStyles((theme) => ({
     root:
